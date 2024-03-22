@@ -3,17 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <title>Markdown Ver1.1</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/night-owl.min.css" />
+    <script src="./js/highlight.js" defer></script>
+    <script src="./js/marked.js" defer></script>
   </head>
   <body>
     <nav>
-    <ul>
-      <li><a href="?name=test.md">test.md</a></li>
-    </ul>
-  </nav>
+      <ul>
+        <li><a href="?name=test.md">test.md</a></li>
+      </ul>
+    </nav>
     <hr />
     <div id="content"></div>
-    <script src="marked.js"></script>
+
+    <div>
+      <code class="js"> </code>
+    </div>
+    <!-- マークダウン -->
     <script>
       const params = new URLSearchParams(window.location.search);
       const filename = params.get("name");
@@ -34,6 +41,8 @@
                 // gfm:true
               });
               document.getElementById("content").innerHTML = marked.parse(data);
+              hljs.initHighlightingOnLoad();
+              console.log(1);
             }
           };
         });
