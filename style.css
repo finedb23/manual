@@ -1,0 +1,75 @@
+body{
+    font-family: sans-serif;
+    background: #000;
+    color: #fff;
+}
+
+nav{
+    a{
+        color: #fff;
+    }
+}
+#content{
+    table{
+       width: 100%;
+
+       th,td{
+           border:1px solid #eee;
+           padding: 10px;
+
+       }
+   }
+   thead{
+    background: #777;
+   }
+   tr:nth-child(2n) td{
+    background-color: #333;
+   }
+
+
+   /* インラインコードの表示 */
+   code{
+    background: #333;
+   }
+
+   /* ブロックコードの表示 */
+   pre code{
+    background: #333;
+   }
+   /* ブロッククォート */
+   blockquote{
+    border-left: 10px solid #eee;
+    padding-left: 10px;
+   }
+
+   /* リンク */
+   a{
+    color: #fff;
+   }
+   /* 画像 */
+   img{
+    /* width: 200px;
+    background-size: cover; */
+   }
+
+   /* 太字 */
+   strong{
+    color: red;
+    font-weight: bold;
+   }
+
+/* 削除 */
+del{
+    background: #374318;
+}
+
+   /* 箇条書き dl */
+   dl{
+    dt{font-weight: bold;}
+   }
+
+   /* おりたたみ */
+   details{
+    background-color: #ccc;
+   }
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Markdown</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <nav>
+    <ul>
+      <li><a href="?name=test.md">test.md</a></li>
+    </ul>
+  </nav>
+    <hr />
+    <div id="content"></div>
+    <script src="marked.js"></script>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const filename = params.get("name");
+      if (filename != null) {
+        // 参考 https://gray-code.com/javascript/load-file-with-xml-http-request/
+        window.addEventListener("DOMContentLoaded", function () {
+          const xhr = new XMLHttpRequest();
+          xhr.open("get", filename);
+          // リクエスト（要求）を送信
+          xhr.send();
+          // 通信が正常に完了したか確認
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+              const data = this.responseText;
+              // オプション
+              marked.use({
+                //pedantic:true,
+                // gfm:true
+              });
+              document.getElementById("content").innerHTML = marked.parse(data);
+            }
+          };
+        });
+      }
+    </script>
+  </body>
+</html>
