@@ -74,9 +74,69 @@ echo $((I-2)) // 8
 
 ```
 NUM=10
-echo 'expr $NUM + 1`
-echo 'expr $NUM - 1`
-echo 'expr $NUM \* 10`
-echo 'expr $NUM / 2`
-echo 'expr $NUM % 3`
+echo `expr $NUM + 1`
+echo `expr $NUM - 1`
+echo `expr $NUM \* 10`
+echo `expr $NUM / 2`
+echo `expr $NUM % 3`
+```
+
+# コマンド実行結果に置き換える
+## バッククォートで囲む方法
+
+```
+NUM=1
+NUM=`expr $NUM + 1`
+echo $NUM
+```
+
+## $()で囲む方法
+
+```
+DATE=$(date)
+echo "$DATE"
+```
+
+# 環境変数
+
+シェル変数をexportコマンドにより環境変数に登録するとそれを引き継ぐことができます。
+
+```
+env1.sh
+echo "$EVAR"
+
+env2.sh 環境変数にEVARを登録する
+export EVAR
+「env1.sh」を実行すると 「echo "$EVAR"」が実行される
+sh ./env1.sh
+```
+
+sourceコマンドでスクリプトファイルを実行します。
+
+```
+env.sh
+EVAR=ABCD
+export EVAR
+```
+スクリプトに書かれている内容を1行ごとにシェルのコマンドライン上に実行させるものです。
+```
+source env.sh
+echo $EVAR
+ABCD
+```
+
+# 評価 testコマンド
+
+```
+test.sh
+echo test "$1" -eq "100"
+echo $?
+「$?」は直前に実行したコマンドの終了ステータスです。
+```
+
+実行
+
+```
+sh test.sh 100
+sh test.sh 90
 ```
