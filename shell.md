@@ -140,3 +140,158 @@ echo $?
 sh test.sh 100
 sh test.sh 90
 ```
+
+## test コマンド評価式の書式
+
+文字列の比較
+
+|名称|説明
+|-|-
+|文字列A = 文字列B|文字列AとBが同一である
+|文字列A ！= 文字列B|文字列AとBが異なる
+|-z 文字列|文字列の長さが0である
+|-n 文字列|文字列の長さが1以上である
+|文字列|文字列が空文字ではない
+
+数値として比較
+|名称|説明
+|-|-
+|数値A -eq 数値B|数値A = 数値Bである
+|数値A -ne 数値B|数値A /= 数値Bである
+|数値A -lt 数値B|数値A < 数値Bである
+|数値A -le 数値B|数値A <= 数値Bである
+|数値A -gt 数値B|数値A > 数値Bである
+|数値A -ge 数値B|数値A >= 数値Bである
+
+ファイルの属性評価
+|名称|説明
+|-|-
+|-e FILE|FILEは存在する
+|-f FILE|通常ファイルである
+|-d FILE|ディレクトリである
+|-L FILE|シンボリックリンクである
+|-c FILE|キャラクタ特殊ファイルである
+|-b FILE|ブロック特殊ファイルである
+|-s FILE|ソケットである
+|-p FILE|名前付きパイプである
+|-r FILE|読み出し可能である
+|-w FILE|書き込み可能である
+|-x FILE|実行可能である
+|-s FILE|ファイルサイズが0以上である
+|FILE1 -nt FILE2|FILE1がFILE2より新しい
+|FILE1 -ot FILE2|FILE1がFILE2より古い
+|FILE1 -ef FILE2|FILE1とFILE2はデバイス番号、およびiノード番号が同一である
+
+条件AND・OR連結
+|名称|説明|備考
+|-|-|-
+|-a|&&|AND (論理積)
+|-o| ｜｜|OR(論理和)
+
+# 条件分岐 if
+
+## 注意 角括弧を書くときは前後にスペースを開けること
+基本形
+```
+if [ $="A" ]
+then
+    echo "Aです"
+fi
+```
+
+if else ifの基本形
+```
+if [ $1 = "A" ]
+then
+    echo "Aである"
+elif[ $1 = "B" ]
+then
+    echo "AではなくBである"
+else
+    echo "AでもBでもない"
+fi
+```
+
+# 条件繰り返し
+## while
+
+基本形
+```
+I=0
+while [ $I -lt 3 ]
+do
+    echo "$I"
+    I=`expr $I + 1`
+done
+```
+$Iのカウントは、下記のようにもできる
+```
+I=0
+while [ $I -lt 3 ]
+do
+    echo "$I"
+    I=$((I+1))
+done
+```
+注意: Amazonの本では「((I=I+1))」となっているがエラーになる
+
+### 永久ループ
+
+while true は永久ループになる
+
+breakでループから抜ける
+```
+I=1
+while true
+do
+    echo "$I"
+    I=$((I+1))
+    if [ $I -gt 3 ]
+    then
+        break
+    fi
+done
+```
+
+
+```
+I=1
+while true
+do
+    echo "count $I"
+    I=$((I+1))
+    if [ $I -le 3 ]
+    then
+        continue
+    else
+        break
+    fi
+    echo "next"
+done
+```
+
+# リスト走査 for文
+
+```
+for S in AAA BBB CCC
+do
+    echo $s
+done
+```
+### 拡張子が「*.txt」を表示する
+```
+for S in `ls *.txt`
+  do
+    echo $S
+done
+```
+
+$@はコマンドライン引数のリストを格納しています。
+```
+alist.sh
+for S in $@; do
+    echo $S
+done
+```
+実行:```$ sh alist.sh AA BB CC```
+
