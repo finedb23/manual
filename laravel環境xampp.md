@@ -52,6 +52,9 @@ GRANT ALL PRIVILEGES ON selfphp.* TO selfusr@localhost IDENTIFIED BY 'selfpass';
 extension=zip 962行目
 ```
 
+## プロジェクト作成コマンド
+
+```
 composer create-project laravel/laravel プロジェクト名 --prefer-dist "10.*"
 ```
 
@@ -72,11 +75,8 @@ php artisan -v
 
 # 手軽に使えるユーザー登録・ログイン機能をインストールする Breeze
 
-
-
-
 ```
-$ sail composer require laravel/breeze --dev
+$ composer require laravel/breeze --dev
    INFO  Discovering packages.  
 
   laravel/breeze .................................................................................................................. DONE
@@ -100,7 +100,7 @@ Using version ^2.0 for laravel/breeze
 - breezeのインストール
 
 ```
-$ sail artisan breeze:install
+$ php artisan breeze:install
 
  ┌ Which Breeze stack would you like to install? ───────────────┐
  │ Blade with Alpine                                            │
