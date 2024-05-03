@@ -6,6 +6,7 @@
 <form action="/hello/destory" method="post">
     <table>
         @csrf
+        @method('DELETE')// 追加
         <input type="hidden" name="id" value="{{$form->id}}">
         <tr>
             <th>name:</th>
@@ -40,6 +41,11 @@ public function destory(Request $request) {
     DB::delete('delete from people where id=:id',$param);
     return redirect('/hello');
 }
+更に上級の書き方
+
+$b=Person::findOrFail($id);
+$person->delete();
+return redirect('hello');
 ```
 
 - ルーター
@@ -47,4 +53,6 @@ public function destory(Request $request) {
 ```php
 Route::get('hello/delete',[HelloController::class,'delete']);
 Route::post('hello/destory',[HelloController::class,'destory']);
+さらに、上級の書き方
+Route::post('hello/{id}',[HelloController::class,'destory']);
 ```

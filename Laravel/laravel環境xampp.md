@@ -52,7 +52,7 @@ GRANT ALL PRIVILEGES ON selfphp.* TO selfusr@localhost IDENTIFIED BY 'selfpass';
 extension=zip 962行目
 ```
 
-## プロジェクト作成コマンド
+# プロジェクト作成コマンド
 
 ```
 composer create-project laravel/laravel プロジェクト名 --prefer-dist "10.*"

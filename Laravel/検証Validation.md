@@ -70,4 +70,16 @@ class MyRule implements ValidationRule
         // $this->validate($request,$validate_rule);
 
         return view('hello.post',['msg'=>'正しく入力されました！']);
-        ```
+```
+
+- 別の書き方
+
+```php
+$validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'name_kana' => ['required', 'string', 'max:255', 'regex:/^[ァ-ロワンヴー]*$/u'],
+            'phone' => ['nullable', 'regex:/^0(\d-?\d{4}|\d{2}-?\d{3}|\d{3}-?\d{2}|\d{4}-?\d|\d0-?\d{4})-?\d{4}$/'],
+            'email' => ['required', 'email'],
+            'body' => ['required', 'string', 'max:2000'],
+        ]);
+```

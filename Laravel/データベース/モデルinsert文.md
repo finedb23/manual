@@ -33,6 +33,11 @@ public function store(Request $request) {
     unset($form['_token']);
     $person->fill($form)->save();
     return redirect('/hello');
+
+    または、
+    $person=new Person();
+    $person->fill($request->except('_token'))->save();
+    return redirect('/hello/create');
 }
 ```
 
